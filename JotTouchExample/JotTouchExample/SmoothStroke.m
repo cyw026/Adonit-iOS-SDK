@@ -43,7 +43,7 @@
     
     if(!element) {return NO; }
     
-    element.color = color;
+    element.color = color;//[UIColor colorWithRed:10.f/(arc4random()%255+1) green:10.f/(arc4random()%255+1) blue:10.f/(arc4random()%255+1) alpha:1.0];//color;
     element.width = width;
     [segments addObject:element];
     return YES;

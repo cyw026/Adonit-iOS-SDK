@@ -47,7 +47,7 @@
     self.canvasView.viewController = self;
     
     [self setupJotSDK];
-    self.currentColor = [UIColor darkGrayColor];
+    self.currentColor = [UIColor blackColor];
     [self selectBrush:self.brushButton];
     [self adonitLogoButtonPressed:self.adonitLogo];
 }
@@ -300,7 +300,7 @@
 - (Brush *)brushBrush
 {
     if (!_brushBrush) {
-        _brushBrush = [[Brush alloc]initWithMinOpac:0.20 maxOpac:0.45 minSize:3.0 maxSize:35 isEraser:NO];
+        _brushBrush = [[Brush alloc]initWithMinOpac:0.8 maxOpac:1.0 minSize:5.0 maxSize:50 isEraser:NO];
         _brushBrush.brushColor = self.currentColor;
     }
     return _brushBrush;

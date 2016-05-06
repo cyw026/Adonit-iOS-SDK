@@ -14,6 +14,8 @@
 		3CCAF05E1A7A86A70023607E /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CCAF05D1A7A86A70023607E /* Launch Screen.xib */; };
 		3CDB12801AE6EBD30066B9C5 /* Brush.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB127F1AE6EBD30066B9C5 /* Brush.m */; };
 		3CDB12811AE6EBD30066B9C5 /* Brush.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB127F1AE6EBD30066B9C5 /* Brush.m */; };
+		726FE0A41CDC681F0083F382 /* brush1.png in Resources */ = {isa = PBXBuildFile; fileRef = 726FE0A31CDC681F0083F382 /* brush1.png */; };
+		726FE0A61CDCA28F0083F382 /* brush.png in Resources */ = {isa = PBXBuildFile; fileRef = 726FE0A51CDCA28F0083F382 /* brush.png */; };
 		7717F9481A1CD859001706AE /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7717F9471A1CD859001706AE /* MainStoryboard.storyboard */; };
 		7747EC821A1BDC9700D18429 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747EC811A1BDC9700D18429 /* main.m */; };
 		7747EC851A1BDC9700D18429 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747EC841A1BDC9700D18429 /* AppDelegate.m */; };
@@ -56,6 +58,8 @@
 		3CCAF05D1A7A86A70023607E /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		3CDB127E1AE6EBD30066B9C5 /* Brush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brush.h; sourceTree = "<group>"; };
 		3CDB127F1AE6EBD30066B9C5 /* Brush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brush.m; sourceTree = "<group>"; };
+		726FE0A31CDC681F0083F382 /* brush1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush1.png; sourceTree = "<group>"; };
+		726FE0A51CDCA28F0083F382 /* brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush.png; sourceTree = "<group>"; };
 		7717F9471A1CD859001706AE /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		7747EC7C1A1BDC9700D18429 /* JotWorkshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JotWorkshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7747EC801A1BDC9700D18429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 		3CAEF9681BC8456D001B18A5 /* Drawing Engine / Line Interpolation */ = {
 			isa = PBXGroup;
 			children = (
+				726FE0A31CDC681F0083F382 /* brush1.png */,
+				726FE0A51CDCA28F0083F382 /* brush.png */,
 				3CDB127E1AE6EBD30066B9C5 /* Brush.h */,
 				3CDB127F1AE6EBD30066B9C5 /* Brush.m */,
 				7747ECB81A1BDED100D18429 /* SegmentSmoother.h */,
@@ -323,7 +329,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				726FE0A41CDC681F0083F382 /* brush1.png in Resources */,
 				7717F9481A1CD859001706AE /* MainStoryboard.storyboard in Resources */,
+				726FE0A61CDCA28F0083F382 /* brush.png in Resources */,
 				3C600B6D1CDBEE410012E354 /* AdonitSDK.bundle in Resources */,
 				3CCAF05E1A7A86A70023607E /* Launch Screen.xib in Resources */,
 				7747EC8D1A1BDC9700D18429 /* Images.xcassets in Resources */,

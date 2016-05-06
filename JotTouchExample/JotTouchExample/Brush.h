@@ -7,10 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AdonitSDK/JotConstants.h>
+#import <AdonitSDK/JotStylusManager.h>
+
+#define           VELOCITY_CLAMP_MIN 20
+#define           VELOCITY_CLAMP_MAX 4000
+static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
+
 
 @interface Brush : NSObject
+{
+    BOOL shouldUseVelocity;
+    
+    int numberOfTouches;
+    CGPoint lastLoc;
+    NSDate* lastDate;
+}
 
 @property (nonatomic) UIColor *brushColor;
+@property (nonatomic, readonly) UIImage* texture;
 
 @property CGFloat minOpacity;
 @property CGFloat maxOpacity;
@@ -20,6 +35,21 @@
 
 @property BOOL isEraser;
 
+/**
+ * the velocity of the last touch, between 0 and 1
+ *
+ * a value of 0 means the pen is moving less than or equal to
+ * the VELOCITY_CLAMP_MIN
+ * a value of 1 means the pen is moving faster than or equal to
+ * the VELOCITY_CLAMP_MAX
+ **/
+@property (nonatomic) CGFloat velocity;
+
+@property (nonatomic) BOOL shouldUseVelocity;
+
+
 -(instancetype)init;
 -(instancetype)initWithMinOpac:(CGFloat)minOpac maxOpac:(CGFloat)maxOpac minSize:(CGFloat)minSize maxSize:(CGFloat)maxSize isEraser:(BOOL)isEraser;
+
+- (CGFloat) widthForPressure:(CGFloat)pressure;
 @end

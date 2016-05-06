@@ -19,6 +19,10 @@
 #import "UIEvent+iOS8.h"
 
 @interface CanvasView ()
+{
+    NSDate* lastDate;
+    int numberOfTouches;
+}
 
 // The pixel dimensions of the backbuffer
 @property GLint backingWidth;
@@ -111,7 +115,8 @@
         return;
     }
     
-    [self createDefaultBrushTexture];
+    //[self createDefaultBrushTexture];
+    [self setupBrushTexture:self.currentBrush.texture];
     
     // Set the view's scale factor
     self.contentScaleFactor = [[UIScreen mainScreen] scale];
@@ -283,12 +288,25 @@
             UITouch *lastCoalescedTouch = [coalescedTouches lastObject];
             SmoothStroke *currentStroke = [self getStrokeForHash:@(mainTouch.hash)];
             
+            lastDate = [NSDate date];
+            numberOfTouches = 1;
+            //self.currentBrush.velocity = 1;
+            
             for (UITouch *coalescedTouch in coalescedTouches) {
                 CGPoint location = [coalescedTouch locationInView:self];
 
-                [self addLineToAndRenderStroke:[self getStrokeForHash:@(currentStroke.hash)]
+//                [self addLineToAndRenderStroke:currentStroke
+//                                       toPoint:location
+//                                       toWidth:[self widthForPressure:1.0]
+//                                       toColor:[self colorForPressure:0.5]
+//                                      withPath:nil
+//                                  shouldRender:NO
+//                              coalescedInteger:coalescedTouches.count];
+                
+                CGFloat width = [self.currentBrush widthForPressure:0.5];
+                [self addLineToAndRenderStroke:currentStroke
                                        toPoint:location
-                                       toWidth:[self widthForPressure:0.5]
+                                       toWidth:width
                                        toColor:[self colorForPressure:0.5]
                                       withPath:nil
                                   shouldRender:coalescedTouch.timestamp == lastCoalescedTouch.timestamp
@@ -300,6 +318,8 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"touchesMoved:");
+    
     if (![JotStylusManager sharedInstance].isStylusConnected) {
         for (UITouch *mainTouch in touches) {
             
@@ -311,13 +331,20 @@
                 CGPoint location = [coalescedTouch locationInView:self];
 
                 if (currentStroke) {
+                    
+                self.currentBrush.velocity = [self velocityForTouch:coalescedTouch];
+                CGFloat width = [self.currentBrush widthForPressure:0.5];
+                NSLog(@"velocity:%f", self.currentBrush.velocity);
+                lastDate = [NSDate date];
+                    
                  [self addLineToAndRenderStroke:currentStroke
                                         toPoint:location
-                                        toWidth:[self widthForPressure:0.5]
+                                        toWidth:[self.currentBrush widthForPressure:0.5]
                                         toColor:[self colorForPressure:0.5]
                                        withPath:nil
                                    shouldRender:coalescedTouch.timestamp == lastCoalescedTouch.timestamp
                                coalescedInteger:coalescedTouches.count];
+                    
                 }
             }
         }
@@ -338,13 +365,34 @@
                
                 if (currentStroke) {
                     // now line to the end of the stroke
-                    [self addLineToAndRenderStroke:currentStroke
-                                           toPoint:location
-                                           toWidth:[self widthForPressure:0.5]
-                                           toColor:[self colorForPressure:0.5]
-                                          withPath:nil
-                                      shouldRender:coalescedTouch.timestamp == lastCoalescedTouch.timestamp
-                                  coalescedInteger:coalescedTouches.count];
+                    
+                    
+                    
+//                    CGPoint l = [coalescedTouch locationInView:self];
+//                    CGPoint previousPoint = [coalescedTouch previousLocationInView:self];
+//                    // find how far we've travelled
+//                    float distanceFromPrevious = sqrtf((l.x - previousPoint.x) * (l.x - previousPoint.x) + (l.y - previousPoint.y) * (l.y - previousPoint.y));
+//                    
+//                    self.currentBrush.velocity = [self velocityForTouch:coalescedTouch];
+//                    NSLog(@"distanceFromPrevious:%f", distanceFromPrevious);
+//                    
+//                    if (self.currentBrush.velocity > 0.1) {
+//                        [self cleanupEndedStroke:currentStroke forHash:@(mainTouch.hash)];
+//                        return;
+//                    } else {
+//                        self.currentBrush.velocity = 0;
+//                    }
+//                    
+//                    CGFloat width = [self.currentBrush widthForPressure:0.5];
+//                    
+//                    
+//                    [self addLineToAndRenderStroke:currentStroke
+//                                           toPoint:location
+//                                           toWidth:width
+//                                           toColor:[self colorForPressure:0.5]
+//                                          withPath:nil
+//                                      shouldRender:coalescedTouch.timestamp == lastCoalescedTouch.timestamp
+//                                  coalescedInteger:coalescedTouches.count];
                     
                     if (coalescedTouch.timestamp == lastCoalescedTouch.timestamp) {
                         [self cleanupEndedStroke:currentStroke forHash:@(mainTouch.hash)];
@@ -397,6 +445,33 @@
     CGFloat segmentAlpha = minAlpha + (maxAlpha-minAlpha) * pressure;
     if(segmentAlpha < minAlpha) segmentAlpha = minAlpha;
     return [self.currentBrush.brushColor colorWithAlphaComponent:segmentAlpha];
+}
+
+/**
+ * helper method to calculate the velocity of the
+ * input touch. it calculates the distance travelled
+ * from the previous touch over the duration elapsed
+ * between touches
+ */
+- (CGFloat) velocityForTouch:(UITouch*)touch
+{
+    //
+    // first, find the current and previous location of the touch
+    CGPoint l = [touch locationInView:self];
+    CGPoint previousPoint = [touch previousLocationInView:self];
+    // find how far we've travelled
+    float distanceFromPrevious = sqrtf((l.x - previousPoint.x) * (l.x - previousPoint.x) + (l.y - previousPoint.y) * (l.y - previousPoint.y));
+    // how long did it take?
+    CGFloat duration = [[NSDate date] timeIntervalSinceDate:lastDate];
+    // velocity is distance/time
+    CGFloat velocityMagnitude = distanceFromPrevious/duration;
+    
+    // we need to make sure we keep velocity inside our min/max values
+    float clampedVelocityMagnitude = clamp(VELOCITY_CLAMP_MIN, VELOCITY_CLAMP_MAX, velocityMagnitude);
+    // now normalize it, so we return a value between 0 and 1
+    float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);
+    
+    return normalizedVelocity;
 }
 
 #pragma mark - Public Interface
