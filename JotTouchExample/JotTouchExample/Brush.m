@@ -14,7 +14,7 @@
 
 - (instancetype)init
 {
-    return [self initWithMinOpac:0.8 maxOpac:1.0 minSize:2 maxSize:30 isEraser:NO];
+    return [self initWithMinOpac:0.8 maxOpac:1.0 minSize:5 maxSize:30 isEraser:NO];
 }
 
 -(instancetype)initWithMinOpac:(CGFloat)minOpac maxOpac:(CGFloat)maxOpac minSize:(CGFloat)minSize maxSize:(CGFloat)maxSize isEraser:(BOOL)isEraser
@@ -41,7 +41,7 @@
 }
 
 -(UIImage*) texture{
-    return [UIImage imageNamed:@"brush.png"];
+    return [UIImage imageNamed:@"brush1.png"];
 }
 
 /**
@@ -57,7 +57,15 @@
         CGFloat width = (_velocity - 1);
         if(width > 0) width = 0;
         width = _minSize + ABS(width) * (_maxSize - _minSize);
+        
+        if (lastWidth) {
+            width = lastWidth*0.8 + width*0.2;
+        }
+        
         if(width < 1) width = 1;
+        
+        lastWidth = width;
+        
         return width;
     }else{
         CGFloat newWidth = _minSize + (_maxSize-_minSize) * pressure;

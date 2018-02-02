@@ -300,7 +300,7 @@
 - (Brush *)brushBrush
 {
     if (!_brushBrush) {
-        _brushBrush = [[Brush alloc]initWithMinOpac:0.8 maxOpac:1.0 minSize:5.0 maxSize:50 isEraser:NO];
+        _brushBrush = [[Brush alloc]initWithMinOpac:0.8 maxOpac:1.0 minSize:5.0 maxSize:64 isEraser:NO];
         _brushBrush.brushColor = self.currentColor;
     }
     return _brushBrush;

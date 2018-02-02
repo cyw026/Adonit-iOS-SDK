@@ -11,7 +11,7 @@
 #import <AdonitSDK/JotStylusManager.h>
 
 #define           VELOCITY_CLAMP_MIN 20
-#define           VELOCITY_CLAMP_MAX 4000
+#define           VELOCITY_CLAMP_MAX 5000
 static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
 
 
@@ -22,6 +22,7 @@ static float clamp(min, max, value) { return fmaxf(min, fminf(max, value)); }
     int numberOfTouches;
     CGPoint lastLoc;
     NSDate* lastDate;
+    CGFloat lastWidth;
 }
 
 @property (nonatomic) UIColor *brushColor;

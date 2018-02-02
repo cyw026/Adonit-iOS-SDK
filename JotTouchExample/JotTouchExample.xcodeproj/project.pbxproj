@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12026F991D1066F40052A361 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 12026F981D1066F40052A361 /* Circle.png */; };
+		12026F9B1D1066FE0052A361 /* FadedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 12026F9A1D1066FE0052A361 /* FadedCircle.png */; };
 		1C83D2411BB2F73E00F9048F /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83D2401BB2F73E00F9048F /* Helper.m */; };
 		1C83D2441BB2FBBF00F9048F /* UIEvent+iOS8.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83D2431BB2FBBF00F9048F /* UIEvent+iOS8.m */; };
 		3C600B6B1CDBEE3B0012E354 /* AdonitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C600B6A1CDBEE3B0012E354 /* AdonitSDK.framework */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12026F981D1066F40052A361 /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
+		12026F9A1D1066FE0052A361 /* FadedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FadedCircle.png; sourceTree = "<group>"; };
 		1C83D23F1BB2F73E00F9048F /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		1C83D2401BB2F73E00F9048F /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		1C83D2421BB2FBBF00F9048F /* UIEvent+iOS8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIEvent+iOS8.h"; sourceTree = "<group>"; };
@@ -139,7 +143,9 @@
 		3CAEF9681BC8456D001B18A5 /* Drawing Engine / Line Interpolation */ = {
 			isa = PBXGroup;
 			children = (
+				12026F9A1D1066FE0052A361 /* FadedCircle.png */,
 				726FE0A31CDC681F0083F382 /* brush1.png */,
+				12026F981D1066F40052A361 /* Circle.png */,
 				726FE0A51CDCA28F0083F382 /* brush.png */,
 				3CDB127E1AE6EBD30066B9C5 /* Brush.h */,
 				3CDB127F1AE6EBD30066B9C5 /* Brush.m */,
@@ -298,6 +304,7 @@
 				TargetAttributes = {
 					7747EC7B1A1BDC9700D18429 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = LK4296EJ4N;
 					};
 					7747EC941A1BDC9800D18429 = {
 						CreatedOnToolsVersion = 6.1;
@@ -329,7 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12026F9B1D1066FE0052A361 /* FadedCircle.png in Resources */,
 				726FE0A41CDC681F0083F382 /* brush1.png in Resources */,
+				12026F991D1066F40052A361 /* Circle.png in Resources */,
 				7717F9481A1CD859001706AE /* MainStoryboard.storyboard in Resources */,
 				726FE0A61CDCA28F0083F382 /* brush.png in Resources */,
 				3C600B6D1CDBEE410012E354 /* AdonitSDK.bundle in Resources */,
